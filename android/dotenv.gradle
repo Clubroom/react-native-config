@@ -69,7 +69,8 @@ loadDotEnv()
 android {
     defaultConfig {
         project.env.each { k, v ->
-            def escaped = v.replaceAll("%","\\\\u0025")
+            def escaped = v.replaceAll("%", "\\\\u0025")
+            manifestPlaceholders[k] = escaped
             buildConfigField "String", k, "\"$v\""
             resValue "string", k, "\"$escaped\""
         }
